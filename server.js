@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
-//* this is done so express uses bodyparser
+const cors = require('cors');
+
+//* this is done so express uses bodyparser and cors
 app.use(express.json());
+app.use(cors());
 
 const handleImageUpload = require('./functions/handleImageUpload');
 const handleSignin = require('./functions/handleSignin');
@@ -23,8 +26,8 @@ app.get('/profiles', (req, res) => {
 	res.send(mockDatabase);
 });
 
-app.listen(3000, () => {
-	console.log('app is listening to port 3000');
+app.listen(3001, () => {
+	console.log('app is listening to port 3001');
 });
 
 app.post('/register', (req, res) => {
