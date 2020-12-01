@@ -1,3 +1,5 @@
+const handleFilter = require('./handleFilter');
+
 const imageUpload = (req, res) => {
 	const { ingredientsUrl } = req.body;
 
@@ -40,14 +42,7 @@ const imageUpload = (req, res) => {
 			// Since we have one input, one output will exist here.
 			const output = response.outputs[0].data.concepts;
 
-			const replyWithingredients = output.filter(
-				concept =>
-					concept.value > 0.7 &&
-					concept.name != 'vegetable' &&
-					concept.name != 'pasture'
-			);
-
-			res.send(replyWithingredients);
+			res.send(handleFilter.filterOutput(output));
 
 			/*for (const concept of output.data.concepts) {
 				console.log(concept.name + ' ' + concept.value);
